@@ -6,7 +6,7 @@ type Error = {
   message: string;
 };
 const githubService = {
-  getRepos: async (): Promise<GithubRepo[] | Error> => {
+  getRepos: async (): Promise<GithubRepo[] | Error | any> => {
     const url = `${configs.githubApiBaseUrl}/repositories`;
     const init = {
       headers: {
