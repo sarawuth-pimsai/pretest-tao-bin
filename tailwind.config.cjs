@@ -10,6 +10,9 @@ module.exports = {
         40: "2.5rem",
         320: "20rem",
       },
+      minHeight: {
+        56: "3.5rem",
+      },
     },
   },
   plugins: [],

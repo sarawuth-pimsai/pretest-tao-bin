@@ -21,14 +21,13 @@ const PageNo = ({ page, active, onClick }: PageProps): JSX.Element => {
   }
   return (
     <div
-      className="flex min-w-40 rounded-md border px-3 py-2 justify-center"
+      className="flex min-w-40 rounded-md border px-3 py-2 justify-center cursor-pointer"
       onClick={() => onClick(page)}
     >
       {page}
     </div>
   );
 };
-const PageNoMem = React.memo(PageNo);
 const Pagination = ({
   currentPage,
   totalPage,
@@ -41,19 +40,17 @@ const Pagination = ({
   }, [totalPage]);
   return (
     <>
-      <div className="flex justify-center my-4">
-        <ul className="flex">
-          {pages.map((page) => (
-            <li key={`${genUniqueId(5)}`} className="px-3 py-2">
-              <PageNoMem
-                page={page + 1}
-                active={page + 1 === currentPage}
-                onClick={onClick}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="flex">
+        {pages.map((page) => (
+          <li key={`${genUniqueId(5)}`} className="px-3 py-2">
+            <PageNo
+              page={page + 1}
+              active={page + 1 === currentPage}
+              onClick={onClick}
+            />
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
