@@ -7,6 +7,7 @@ module.exports = {
     },
     extend: {
       minWidth: {
+        40: "2.5rem",
         320: "20rem",
       },
     },

@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useImmer } from "use-immer";
+import Pagination from "../components/Pagination";
 import useGithubDispatchContext from "../hooks/useGithubDispatchContext";
 import useGithubStateContext from "../hooks/useGithubStateContext";
-import { GithubRepo } from "../models/github";
 import githubService from "../services/githubService";
 import genUniqueId from "../utils/genUniqueId";
 
@@ -15,9 +14,11 @@ const GithubPage = ({}: Props) => {
     const response = await githubService.getRepos();
     githubDispatch({ type: "LOAD_REPOS", payload: response });
   };
+
   useEffect(() => {
     fetchGithubRepos();
   }, []);
+
   return (
     <>
       <section className="flex flex-col justify-center p-4">
@@ -55,30 +56,13 @@ const GithubPage = ({}: Props) => {
               })}
           </tbody>
         </table>
-        <div className="flex justify-center">
-          <ul className="flex space-x-4">
-            {[...Array(totalPage).keys()].map((page) => {
-              return currentPage === page + 1 ? (
-                <li
-                  className="ring-1 rounded-md py-2 px-3 bg-sky-600 text-blue-200"
-                  key={`repo_page_${page}_${genUniqueId(5)}`}
-                >
-                  {page + 1}
-                </li>
-              ) : (
-                <li
-                  className="ring-1 rounded-md py-2 px-3 cursor-pointer"
-                  key={`repo_page_${page}_${genUniqueId(5)}`}
-                  onClick={() =>
-                    githubDispatch({ type: "SET_PAGE", payload: page + 1 })
-                  }
-                >
-                  {page + 1}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <Pagination
+          totalPage={totalPage}
+          currentPage={currentPage}
+          onClick={(page) =>
+            githubDispatch({ type: "SET_PAGE", payload: page })
+          }
+        />
       </section>
     </>
   );
