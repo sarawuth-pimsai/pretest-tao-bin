@@ -7,10 +7,10 @@ import genUniqueId from "../utils/genUniqueId";
 
 const GithubPage = () => {
   const { repos, totalPage, currentPage } = useGithubStateContext();
-  const githubDispatch = useGithubDispatchContext();
+  const { setPage, loadRepos } = useGithubDispatchContext();
   const fetchGithubRepos = async () => {
     const response = await githubService.getRepos();
-    githubDispatch({ type: "LOAD_REPOS", payload: response });
+    loadRepos(response);
   };
 
   useEffect(() => {
@@ -66,9 +66,7 @@ const GithubPage = () => {
             <Pagination
               totalPage={totalPage}
               currentPage={currentPage}
-              onClick={(page) =>
-                githubDispatch({ type: "SET_PAGE", payload: page })
-              }
+              onClick={(page) => setPage(page)}
             />
           </div>
         </div>
