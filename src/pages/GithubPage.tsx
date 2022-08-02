@@ -51,6 +51,7 @@ const GithubPage = () => {
                           <img
                             className="p-1 w-10 h-10 rounded-full ring-1 ring-gray-300 dark:ring-gray-500"
                             src={repo.owner?.avatarUrl}
+                            alt={repo.owner?.login}
                           />
                           <div>{repo.owner?.login}</div>
                         </div>
